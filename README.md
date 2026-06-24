@@ -17,9 +17,9 @@ Un gatito adorable que vive en tu escritorio. Creado con Avalonia UI y .NET 8.
 
 | Plataforma | Descarga | Tamaño |
 |------------|----------|--------|
-| 🪟 Windows | [Descargar](Releases/DesktopCat-Windows.zip) | ~40 MB |
-| 🐧 Linux | [Descargar](Releases/DesktopCat-Linux.zip) | ~40 MB |
-| 🍎 macOS | [Descargar](Releases/DesktopCat-macOS.zip) | ~40 MB |
+| 🪟 Windows | [Descargar](ZipFiles/DesktopCat-Windows.zip) | ~40 MB |
+| 🐧 Linux | [Descargar](ZipFiles/DesktopCat-Linux.zip) | ~40 MB |
+| 🍎 macOS | [Descargar](ZipFiles/DesktopCat-macOS.zip) | ~40 MB |
 
 ## 🚀 Instalación
 
