@@ -1,7 +1,7 @@
-﻿using Avalonia.Controls;
-using System;
+﻿using Avalonia;
+using Avalonia.Controls;
 
-namespace GatitoEscritorio.Services;
+namespace DesktopCat.Services;
 
 public class WindowManager
 {

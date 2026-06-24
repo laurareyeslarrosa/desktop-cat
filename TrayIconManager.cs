@@ -1,27 +1,35 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Avalonia.Threading;
 using System;
 
-namespace GatitoEscritorio;
+namespace DesktopCat;
 
 public class TrayIconManager
 {
     private readonly Window _mainWindow;
     private readonly TrayIcon _trayIcon;
+    private readonly WindowNotificationManager _notificationManager;
     private bool _isWindowVisible;
 
-    public TrayIconManager(Window mainWindow)
+    public TrayIconManager(Window mainWindow, WindowNotificationManager notificationManager)
     {
         _mainWindow = mainWindow;
+        _notificationManager = notificationManager;
         _isWindowVisible = true;
 
         // Crear el icono de bandeja
+        var uri = new Uri("avares://Assets/Images/gatito.png");
+        var bitmap = new Bitmap(AssetLoader.Open(uri));
+        
         _trayIcon = new TrayIcon
         {
-            Icon = new WindowIcon(new Uri("avares://GatitoEscritorio/Assets/Images/gatito.png")),
-            ToolTipText = "Gatito de Vic"
+            Icon = new WindowIcon(bitmap),
+            ToolTipText = "Gatitoooo!!!!"
         };
-
+        
         // Crear el menú contextual
         var menu = new NativeMenu();
         
@@ -94,8 +102,15 @@ public class TrayIconManager
     {
         Dispatcher.UIThread.Post(() =>
         {
-            _trayIcon.ShowBalloonTip("¡Hola!", "Haz click en el icono para ocultar/mostrar", 
-                BalloonIcon.Info);
+            // Notificación estilo toast
+            _notificationManager.Show(
+                new Notification(
+                    "¡Hola!",
+                    "Haz click en el icono para ocultar/mostrar",
+                    NotificationType.Information,
+                    TimeSpan.FromSeconds(3)
+                )
+            );
         });
     }
 
