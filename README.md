@@ -17,11 +17,10 @@ Un gatito adorable que vive en tu escritorio. Creado con Avalonia UI y .NET 8.
 
 | Plataforma | Descarga | Tamaño |
 |------------|----------|--------|
-| 🪟 Windows Zip | [Descargar](ReleaseFiles/DesktopCat-Windows.zip) | ~40 MB |
-| 🪟 Windows Zip (test release direct download) | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat/DesktopCat-Windows.zip) | ~40 MB |
-| 🐧 Linux Zip | [Descargar](ReleaseFiles/DesktopCat-Linux.zip) | ~40 MB |
-| 🐧 Linux RPM | [Descargar](ReleaseFiles/DesktopCat-1.0.0-1.x86_64.rpm) | ~40 MB |
-| 🍎 macOS Zip | [Descargar](ReleaseFiles/DesktopCat-macOS.zip) | ~40 MB |
+| 🪟 Windows Zip | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat/DesktopCat-Windows.zip) | ~40 MB |
+| 🐧 Linux Zip | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat/DesktopCat-Linux.zip) | ~40 MB |
+| 🐧 Linux RPM | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat//DesktopCat-1.0.0-1.x86_64.rpm) | ~40 MB |
+| 🍎 macOS Zip | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat//DesktopCat-macOS.zip) | ~40 MB |
 
 ## 🚀 Instalación
 
