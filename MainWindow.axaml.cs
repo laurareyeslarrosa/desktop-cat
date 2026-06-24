@@ -11,29 +11,42 @@ public partial class MainWindow : Window
 {
     private Point _dragStartPosition;
     private bool _isDragging;
+    private int _clickCount = 0;
 
     public MainWindow()
     {
         InitializeComponent();
         
-        // Cargar la imagen desde los recursos
+        // Cargar la imagen
         var image = this.FindControl<Image>("GatitoImagen");
         if (image != null)
         {
             try
             {
-                var uri = new Uri("avares://Assets/Images/gatito.png");
+                var uri = new Uri(Constants.ImagePath);
                 image.Source = new Bitmap(AssetLoader.Open(uri));
+                Console.WriteLine("✅ Imagen cargada correctamente");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error cargando imagen: {ex.Message}");
+                Console.WriteLine($"❌ Error: {ex.Message}");
             }
         }
     }
 
     private void Window_PointerPressed(object sender, PointerPressedEventArgs e)
     {
+        // Contar clicks
+        _clickCount++;
+        Console.WriteLine($"🖱️ Click #{_clickCount} en la ventana");
+        
+        // Actualizar el contador si existe
+        var counter = this.FindControl<TextBlock>("ClickCounter");
+        if (counter != null)
+        {
+            counter.Text = $"Clicks: {_clickCount}";
+        }
+        
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
         {
             _isDragging = true;
@@ -47,8 +60,6 @@ public partial class MainWindow : Window
         {
             var currentPosition = e.GetPosition(this);
             var delta = currentPosition - _dragStartPosition;
-            
-            // Mover la ventana
             var newPosition = this.Position + new PixelPoint((int)delta.X, (int)delta.Y);
             this.Position = newPosition;
         }

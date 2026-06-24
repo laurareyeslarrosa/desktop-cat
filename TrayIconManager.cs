@@ -21,7 +21,7 @@ public class TrayIconManager
         _isWindowVisible = true;
 
         // Crear el icono de bandeja
-        var uri = new Uri("avares://Assets/Images/gatito.png");
+        var uri = new Uri(Constants.ImagePath);
         var bitmap = new Bitmap(AssetLoader.Open(uri));
         
         _trayIcon = new TrayIcon

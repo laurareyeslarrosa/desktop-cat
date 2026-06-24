@@ -1,7 +1,10 @@
-﻿using Avalonia;
+﻿
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
+using System;
 
 namespace DesktopCat;
 
@@ -21,15 +24,15 @@ public partial class App : Application
         {
             var mainWindow = new MainWindow();
             desktop.MainWindow = mainWindow;
-
-            // Inicializar el sistema de notificaciones
+            
+            // Inicializar notificaciones
             _notificationManager = new WindowNotificationManager(mainWindow)
             {
                 Position = NotificationPosition.BottomRight,
                 MaxItems = 5
             };
             
-            // Inicializar el sistema de bandeja
+            // Inicializar Tray Icon
             _trayManager = new TrayIconManager(mainWindow, _notificationManager);
             _trayManager.Initialize();
         }
