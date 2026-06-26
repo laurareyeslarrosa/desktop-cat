@@ -2,7 +2,7 @@
 
 Un gatito adorable que vive en tu escritorio. Creado con Avalonia UI y .NET 8.
 
-![Desktop Cat](Assets/Images/gatito.png)
+![Desktop Cat](Assets/Images/bellota-front.png)
 
 ## ✨ Características
 
