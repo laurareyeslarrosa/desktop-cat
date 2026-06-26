@@ -7,11 +7,13 @@
 
 Un gatito adorable que vive en tu escritorio. Creado con Avalonia UI y .NET 8.
 
+<br/>
 <p align="center">
   <img src="Assets/Images/bellota-idle-left.png" width="200" height="200" style="margin: 10px;">
   <img src="Assets/Images/bellota-front.png" width="200" height="200" style="margin: 10px;">
   <img src="Assets/Images/bellota-sleep-right.png" width="200" height="200" style="margin: 10px;">
 </p>
+<br/>
 
 ## ✨ Características
 
