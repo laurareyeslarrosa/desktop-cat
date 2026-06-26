@@ -1,19 +1,20 @@
 # 🐱 Desktop Cat - Gatito de Escritorio
 
+[![.NET](https://img.shields.io/badge/.NET-8.0-purple)](https://dotnet.microsoft.com/)
+[![Avalonia](https://img.shields.io/badge/Avalonia-11.0.6-blue)](https://avaloniaui.net/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)](https://github.com/laurareyeslarrosa/desktop-cat)
+
 Un gatito adorable que vive en tu escritorio. Creado con Avalonia UI y .NET 8.
 
 <div align="center">
-  <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-    <div>
-      <img src="Assets/Images/bellota-idle-left.png" width="150" height="150" alt="Gatito 1">
-    </div>
-    <div>
-      <img src="Assets/Images/bellota-front.png" width="150" height="150" alt="Gatito 2">
-    </div>
-    <div>
-      <img src="Assets/Images/bellota-sleep-right.png" width="150" height="150" alt="Gatito 3">
-    </div>
-  </div>
+  <table>
+    <tr style="border-top: none;">
+      <td align="center" style="border: none;"><img src="Assets/Images/bellota-idle-left.png" width="200" height="200"></td>
+      <td align="center" style="border: none;"><img src="Assets/Images/bellota-front.png" width="200" height="200"></td>
+      <td align="center" style="border: none;"><img src="Assets/Images/bellota-sleep-right.png" width="200" height="200"></td>
+    </tr>
+  </table>
 </div>
 
 ## ✨ Características
