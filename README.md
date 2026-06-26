@@ -8,11 +8,11 @@
 Un gatito adorable que vive en tu escritorio. Creado con Avalonia UI y .NET 8.
 
 <div align="center">
-  <table>
-    <tr style="border-top: none;">
-      <td align="center" style="border: none;"><img src="Assets/Images/bellota-idle-left.png" width="200" height="200"></td>
-      <td align="center" style="border: none;"><img src="Assets/Images/bellota-front.png" width="200" height="200"></td>
-      <td align="center" style="border: none;"><img src="Assets/Images/bellota-sleep-right.png" width="200" height="200"></td>
+  <table border="0" cellpadding="10" cellspacing="0">
+    <tr>
+      <td align="center"><img src="Assets/Images/bellota-idle-left.png" width="200" height="200"></td>
+      <td align="center"><img src="Assets/Images/bellota-front.png" width="200" height="200"></td>
+      <td align="center"><img src="Assets/Images/bellota-sleep-right.png" width="200" height="200"></td>
     </tr>
   </table>
 </div>
