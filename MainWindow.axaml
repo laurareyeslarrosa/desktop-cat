@@ -1,7 +1,7 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="DesktopCat.MainWindow"
-        Title="Gatito de Lau"
+        Title="Powerpuff cats"
         Width="70" Height="70"
         CanResize="False"
         WindowStartupLocation="CenterScreen"
@@ -13,8 +13,8 @@
         PointerMoved="Window_PointerMoved">
 
       <Grid>
-        <Image Source="avares://DesktopCat/Assets/Images/bellota-front.png"
+        <Image Source="avares://DesktopCat/Assets/Images/Bellota/front.png"
                Stretch="Uniform"
-               Name="GatitoImagen"/>
+               Name="BellotaFront"/>
     </Grid>
 </Window>

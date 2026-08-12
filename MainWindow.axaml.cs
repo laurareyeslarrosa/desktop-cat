@@ -18,7 +18,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         
         // Cargar la imagen
-        var image = this.FindControl<Image>("GatitoImagen");
+        var image = this.FindControl<Image>("BellotaFront");
         if (image != null)
         {
             try
