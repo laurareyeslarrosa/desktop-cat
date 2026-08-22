@@ -29,7 +29,7 @@ Un gatito adorable que vive en tu escritorio. Creado con Avalonia UI y .NET 8.
 | Plataforma           | Descarga                                                                                                                   | Tamaño |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------ |
 | 🪟 Windows Zip       | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat/DesktopCat-Windows.zip)         | ~40 MB |
-| 🪟 Windows Installer | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat/DesktopCat-Windows-Setup.exe)   | ~40 MB |
+| 🪟 Windows Installer | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/DesktopCat-Setup-Windows.iss)               | ~40 MB |
 | 🐧 Linux Zip         | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat/DesktopCat-Linux.zip)           | ~40 MB |
 | 🐧 Linux RPM         | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat//DesktopCat-1.0.0-1.x86_64.rpm) | ~40 MB |
 | 🍎 macOS Zip         | [Descargar](https://github.com/laurareyeslarrosa/desktop-cat/releases/download/desktop-cat//DesktopCat-macOS.zip)          | ~40 MB |
@@ -41,6 +41,12 @@ Un gatito adorable que vive en tu escritorio. Creado con Avalonia UI y .NET 8.
 1. Descarga `DesktopCat-Windows.zip`
 2. Extrae el contenido
 3. Ejecuta `DesktopCat.exe`
+
+### Windows Installer
+
+1. Descarga `DesktopCat-Setup-Windows.iss`
+2. Ejecuta el intalador
+3. Abre `DesktopCat.exe` dentro de la carpeta donde se instaló el programa
 
 ### Linux - Zip
 
