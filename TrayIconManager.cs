@@ -21,13 +21,13 @@ public class TrayIconManager
         _isWindowVisible = true;
 
         // Crear el icono de bandeja
-        var uri = new Uri(Constants.ImagePath);
+        var uri = new Uri(Constants.IdlePath);
         var bitmap = new Bitmap(AssetLoader.Open(uri));
         
         _trayIcon = new TrayIcon
         {
             Icon = new WindowIcon(bitmap),
-            ToolTipText = "Gatitoooo!!!!"
+            ToolTipText = "Bellota - Desktop Cat",
         };
         
         // Crear el menú contextual

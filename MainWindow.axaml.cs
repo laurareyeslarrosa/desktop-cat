@@ -1,73 +1,102 @@
-﻿using Avalonia;
+﻿
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
+using Avalonia.Threading;
+using DesktopCat.Services;
 using System;
+using System.Diagnostics;
 
 namespace DesktopCat;
 
 public partial class MainWindow : Window
 {
-    private Point _dragStartPosition;
-    private bool _isDragging;
-    private int _clickCount = 0;
+    private readonly WindowManager _windowManager;
+    private readonly DispatcherTimer _timer = new();
+    private readonly Stopwatch _clock = Stopwatch.StartNew();
+
+    private CatAnimator? _animator;
+    private long _previousTickMs;
+    private bool _wasWalking;
 
     public MainWindow()
     {
         InitializeComponent();
-        
-        // Cargar la imagen
-        var image = this.FindControl<Image>("BellotaFront");
-        if (image != null)
-        {
-            try
-            {
-                var uri = new Uri(Constants.ImagePath);
-                image.Source = new Bitmap(AssetLoader.Open(uri));
-                Console.WriteLine("✅ Imagen cargada correctamente");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"❌ Error: {ex.Message}");
-            }
-        }
+
+        _windowManager = new WindowManager(this);
+
+        var catImage = this.FindControl<Image>("CatImage");
+
+        if (catImage != null)
+            _animator = new CatAnimator(catImage);
+
+        _timer.Interval =
+            TimeSpan.FromMilliseconds(Constants.UpdateIntervalMs);
+
+        _timer.Tick += OnTimerTick;
+        _timer.Start();
     }
 
-    private void Window_PointerPressed(object sender, PointerPressedEventArgs e)
+    private void OnTimerTick(object? sender, EventArgs e)
     {
-        // Contar clicks
-        _clickCount++;
-        Console.WriteLine($"🖱️ Click #{_clickCount} en la ventana");
-        
-        // Actualizar el contador si existe
-        var counter = this.FindControl<TextBlock>("ClickCounter");
-        if (counter != null)
+        var now = _clock.ElapsedMilliseconds;
+
+        var elapsedMs = now - _previousTickMs;
+        _previousTickMs = now;
+
+        if (_windowManager.IsDragging || _animator == null)
+            return;
+
+        var arrived = _windowManager.FollowCursor(
+            elapsedMs / 1000.0);
+
+        var isWalking = !arrived;
+
+        if (isWalking)
         {
-            counter.Text = $"Clicks: {_clickCount}";
+            _animator.UpdateWalking(elapsedMs);
         }
-        
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+        else if (_wasWalking)
         {
-            _isDragging = true;
-            _dragStartPosition = e.GetPosition(this);
+            _animator.SetIdle();
         }
+
+        _wasWalking = isWalking;
     }
 
-    private void Window_PointerMoved(object sender, PointerEventArgs e)
+    private void Window_PointerPressed(
+        object? sender,
+        PointerPressedEventArgs e)
     {
-        if (_isDragging)
-        {
-            var currentPosition = e.GetPosition(this);
-            var delta = currentPosition - _dragStartPosition;
-            var newPosition = this.Position + new PixelPoint((int)delta.X, (int)delta.Y);
-            this.Position = newPosition;
-        }
+        if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+            return;
+
+        _windowManager.BeginDrag(e);
+        e.Pointer.Capture(this);
     }
 
-    protected override void OnPointerReleased(PointerReleasedEventArgs e)
+    private void Window_PointerMoved(
+        object? sender,
+        PointerEventArgs e)
     {
-        _isDragging = false;
-        base.OnPointerReleased(e);
+        _windowManager.Drag(e);
+    }
+
+    private void Window_PointerReleased(
+        object? sender,
+        PointerReleasedEventArgs e)
+    {
+        _windowManager.EndDrag();
+        e.Pointer.Capture(null);
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        _timer.Stop();
+        _timer.Tick -= OnTimerTick;
+
+        _animator?.Dispose();
+
+        base.OnClosed(e);
     }
 }
