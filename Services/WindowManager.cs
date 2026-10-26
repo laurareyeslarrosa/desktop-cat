@@ -2,16 +2,29 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace DesktopCat.Services;
 
+public enum CatDirection
+{
+    Left,
+    Right,
+    Front,
+    Back
+}
+
 public class WindowManager
 {
     private readonly Window _window;
+    private readonly Stopwatch _clock = Stopwatch.StartNew();
     private bool _isDragging;
     private Point _dragStart;
     private PixelPoint _windowStart;
+    private Point _lastCursor;
+    private bool _hasLastCursor;
+    private long _lastCursorMovementMs;
 
     [StructLayout(LayoutKind.Sequential)]
     private struct NativePoint
@@ -28,7 +41,13 @@ public class WindowManager
         _window = window;
     }
 
-public bool IsDragging => _isDragging;
+    public bool IsDragging => _isDragging;
+
+    public CatDirection CurrentDirection { get; private set; }
+        = CatDirection.Left;
+
+    public long CursorIdleMs =>
+        _clock.ElapsedMilliseconds - _lastCursorMovementMs;
 
     public void BeginDrag(PointerEventArgs e)
     {
@@ -55,6 +74,7 @@ public bool IsDragging => _isDragging;
     public void EndDrag()
     {
         _isDragging = false;
+        _hasLastCursor = false;
     }
 
     public bool FollowCursor(double elapsedSeconds)
@@ -62,14 +82,25 @@ public bool IsDragging => _isDragging;
         if (_isDragging)
             return false;
 
-        if (!GetCursorPos(out var cursor))
+        if (!GetCursorPos(out var native))
             return false;
 
-        var targetX = cursor.X + Constants.CursorOffsetX;
-        var targetY = cursor.Y + Constants.CursorOffsetY;
+        var cursor = new Point(native.X, native.Y);
+        var now = _clock.ElapsedMilliseconds;
+
+        if (!_hasLastCursor ||
+            Distance(cursor, _lastCursor) >=
+            Constants.CursorMovementThreshold)
+        {
+            _lastCursor = cursor;
+            _hasLastCursor = true;
+            _lastCursorMovementMs = now;
+        }
+
+        var targetX = native.X + Constants.CursorOffsetX;
+        var targetY = native.Y + Constants.CursorOffsetY;
 
         var current = _window.Position;
-
         var dx = targetX - current.X;
         var dy = targetY - current.Y;
 
@@ -78,21 +109,40 @@ public bool IsDragging => _isDragging;
         if (distance <= Constants.StopDistance)
             return true;
 
-        // Evita saltos si la aplicación se pausa brevemente.
+        // Elegir la orientación según el eje predominante.
+        if (Math.Abs(dx) > Math.Abs(dy))
+        {
+            CurrentDirection = dx < 0
+                ? CatDirection.Left
+                : CatDirection.Right;
+        }
+        else
+        {
+            CurrentDirection = dy < 0
+                ? CatDirection.Back
+                : CatDirection.Front;
+        }
+
+        // Evitar saltos grandes si el sistema se ralentiza.
         elapsedSeconds = Math.Clamp(elapsedSeconds, 0, 0.05);
 
         var step = Math.Min(
             Constants.FollowSpeed * elapsedSeconds,
             distance - Constants.StopDistance);
 
-        var nextX = current.X + dx / distance * step;
-        var nextY = current.Y + dy / distance * step;
-
         _window.Position = new PixelPoint(
-            (int)Math.Round(nextX),
-            (int)Math.Round(nextY));
+            (int)Math.Round(current.X + dx / distance * step),
+            (int)Math.Round(current.Y + dy / distance * step));
 
         return false;
+    }
+
+     private static double Distance(Point a, Point b)
+    {
+        var dx = a.X - b.X;
+        var dy = a.Y - b.Y;
+
+        return Math.Sqrt(dx * dx + dy * dy);
     }
 
     public void CenterWindow()
