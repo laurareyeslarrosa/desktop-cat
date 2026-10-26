@@ -1,8 +1,9 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="DesktopCat.MainWindow"
-        Title="Powerpuff cats"
-        Width="70" Height="70"
+        Title="Bellota"
+        Width="100" 
+        Height="100"
         CanResize="False"
         WindowStartupLocation="CenterScreen"
         SystemDecorations="None"
@@ -10,11 +11,12 @@
         Background="Transparent"
         Topmost="True"
         PointerPressed="Window_PointerPressed"
-        PointerMoved="Window_PointerMoved">
+        PointerMoved="Window_PointerMoved"
+        PointerReleased="Window_PointerReleased">
 
       <Grid>
-        <Image Source="avares://DesktopCat/Assets/Images/Bellota/front.png"
+        <Image Source="avares://DesktopCat/Assets/Images/Bellota/idle.png"
                Stretch="Uniform"
-               Name="BellotaFront"/>
+               x:Name="CatImage"/>
     </Grid>
 </Window>
